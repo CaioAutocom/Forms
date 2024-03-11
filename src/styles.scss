@@ -1,0 +1,20 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%;  padding: 20px;}
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: lightgray}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.users{
+    width: 100%;
+    display: flex;
+
+    &__card{
+        width: 30%;
+        margin-right: 20px;
+        cursor: pointer;
+    }
+}
