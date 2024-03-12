@@ -14,7 +14,8 @@ import { PasswordConfirmationValidatorDirective } from './password-confirmation-
     exports: [
       EmailPatternValidatorDirective,
       CredentialsValidatorDirective,
-      PasswordStrengthValidatorDirective
+      PasswordStrengthValidatorDirective,
+      PasswordConfirmationValidatorDirective
     ]
 })
 export class DirectivesModule{}

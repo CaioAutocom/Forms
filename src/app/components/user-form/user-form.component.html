@@ -78,7 +78,6 @@
                         matInput
                         ngModel
                         #passwordConfirmationControl="ngModel"
-                        appPasswordStrengthValidator
                         required
                     />
                     <mat-error *ngIf="passwordConfirmationControl.hasError('required')">A <strong>confirmação de Senha</strong> é obrigatória.</mat-error>
