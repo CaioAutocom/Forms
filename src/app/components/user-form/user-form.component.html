@@ -26,8 +26,8 @@
                         [appCredentialsValidator]="'username'"
                         required/>
                         <mat-hint>o <strong>Usuário</strong> será utilizado para o login.</mat-hint>
-                        <mat-error *ngIf="userNameControl.hasError('required')">o <strong>Usuário</strong> é obrigatório.
-                        <mat-error *ngIf="!userNameControl.hasError('required') && userNameControl.hasError('invalidUsername')">Este <strong>Usuário</strong> já está em uso.</mat-error></mat-error>
+                        <mat-error *ngIf="userNameControl.hasError('required')">o <strong>Usuário</strong> é obrigatório.</mat-error>
+                        <mat-error *ngIf="userNameControl.hasError('invalidUsername') && !userNameControl.hasError('required')">Este <strong>Usuário</strong> já está em uso.</mat-error>
                 </mat-form-field>
            
                 <mat-form-field class="user-form__item user-form__item-50">
@@ -42,8 +42,8 @@
                         [appCredentialsValidator]="'email'"
                         required/>
                         <mat-error *ngIf="emailControl.hasError('required')">o <strong>Email</strong> é obrigatório.</mat-error>
-                        <mat-error *ngIf="!emailControl.hasError('required') && emailControl.hasError('invalidEmailPattern')">o <strong>Email</strong> é inválido.</mat-error>
-                        <mat-error *ngIf="!emailControl.hasError('required') && emailControl.hasError('invalidEmail')">Esta <strong>Email</strong> já está em uso.</mat-error>
+                        <mat-error *ngIf="emailControl.hasError('invalidEmailPattern') && !emailControl.hasError('required')">o <strong>Email</strong> é inválido.</mat-error>
+                        <mat-error *ngIf="emailControl.hasError('invalidEmail') && !emailControl.hasError('required')">Este <strong>Email</strong> já está em uso.</mat-error>
                 </mat-form-field>
             </div>
             <div class="user-form__row">
