@@ -10,17 +10,18 @@ import zxcvbn from 'zxcvbn';
       useExisting: PasswordStrengthValidatorDirective,
       multi: true
     }
-   
   ]
 })
+
 export class PasswordStrengthValidatorDirective implements Validator {
   validate(control: AbstractControl<any, any>): ValidationErrors | null {
-    if( !control || control.value) return null;
+    if( !control || !control.value) return null;
 
     const result = zxcvbn(control.value);
     const PASSWORD_IS_WEAK_OR_MEDIUM = result.score !== 4;
 
-    if(PASSWORD_IS_WEAK_OR_MEDIUM) return {'invalidPasswordStrenght' : true} 
+    if(PASSWORD_IS_WEAK_OR_MEDIUM) return {'invalidPasswordStrength' : true} 
+    console.log(result);
     return null;
   }
  }

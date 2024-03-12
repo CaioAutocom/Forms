@@ -1,9 +1,9 @@
 <mat-card>
     <mat-card-content>
-        <form class="user-form">
+        <form class="user-form"  #userForm="ngForm" appPasswordConfirmationValidator>
             <div class="user-form__row">
                 <mat-form-field class="user-form__item user-form__item-100">
-                    <mat-label>Nome:</mat-label>
+                    <mat-label>Nome:</mat-label> 
                     <input
                         type="text" 
                         name="nome"
@@ -47,19 +47,42 @@
                 </mat-form-field>
             </div>
             <div class="user-form__row">
-                <mat-form-field>
+                <mat-form-field class="user-form__item user-form__item-50">
                     <mat-label>Senha:</mat-label>
                     <input
                         type="password"
                         name="senha"
                         matInput
                         [(ngModel)]="userSelected.password"
+                        (ngModelChange)="onPasswordChange($event)"
                         #passwordControl="ngModel"
-                        appPasswordStrenghtValidator
+                        appPasswordStrengthValidator
                         required
                     />
                     <mat-error *ngIf="passwordControl.hasError('required')">A <strong>Senha</strong> é obrigatória.</mat-error>
-                    <mat-error *ngIf="passwordControl.hasError('invaliPasswordStrength') && ! passwordControl.hasError('required')">Digite uma <strong>Senha</strong> mais forte</mat-error>
+                    <mat-error *ngIf="passwordControl.hasError('invalidPasswordStrength') && ! passwordControl.hasError('required')">Digite uma <strong>Senha</strong> mais forte.</mat-error>
+                    <mat-progress-bar mode="determinate" [value]="passwordStrenthValue" 
+                    [ngClass]="{
+                        'weak-password' : passwordStrenthValue <= 30,
+                        'medium-password' : passwordStrenthValue > 30 && passwordStrenthValue <= 60,
+                        'strong-password' : passwordStrenthValue === 100
+                    }"></mat-progress-bar>
+                </mat-form-field>
+
+                <mat-form-field class="user-form__item user-form__item-50">
+                    <mat-label>Confirmação de senha:</mat-label>
+                    <input
+                        autocomplete="one-time-code"
+                        type="password"
+                        name="confirmacaoSenha"
+                        matInput
+                        ngModel
+                        #passwordConfirmationControl="ngModel"
+                        appPasswordStrengthValidator
+                        required
+                    />
+                    <mat-error *ngIf="passwordConfirmationControl.hasError('required')">A <strong>confirmação de Senha</strong> é obrigatória.</mat-error>
+                    <mat-error *ngIf="passwordConfirmationControl.hasError('invalidPasswordConfirmation') && !passwordConfirmationControl.hasError('required')">As senhas não conferem.</mat-error>
                 </mat-form-field>
             </div>
         </form>
