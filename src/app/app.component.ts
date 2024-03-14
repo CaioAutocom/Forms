@@ -6,11 +6,13 @@ import { GenresListResponse } from './types/gengers-list.response';
 import { UsersListResponse } from './types/users-list-response';
 import { StatesListResponse } from './types/states-list.response';
 import { IUser } from './interfaces/user/user.interface';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
+  providers: [{provide: MAT_DATE_LOCALE, useValue: 'pt-BR'}]
 })
 export class AppComponent implements OnInit {
   private _userService = inject(UserService);

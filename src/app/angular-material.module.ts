@@ -4,6 +4,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatButtonModule } from "@angular/material/button";
 
 @NgModule({
     imports: [
@@ -11,14 +12,16 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
         MatFormFieldModule,
         MatProgressBarModule, 
         MatInputModule, 
-        MatDatepickerModule
+        MatDatepickerModule,
+        MatButtonModule
     ],
     exports: [
         MatCardModule,
         MatFormFieldModule,
         MatInputModule,
         MatProgressBarModule,
-        MatDatepickerModule        
+        MatDatepickerModule,
+        MatButtonModule       
     ]
 })
 export class AngularMaterialModule {}

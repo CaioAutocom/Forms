@@ -3,11 +3,14 @@ import { GenresListResponse } from '../../types/gengers-list.response';
 import { StatesListResponse } from '../../types/states-list.response';
 import { IUser } from '../../interfaces/user/user.interface';
 import { getPasswordStrengthValue } from '../../utils/get-passwords-strength-value';
+import {provideNativeDateAdapter} from '@angular/material/core';
+
 
 @Component({
   selector: 'app-user-form',
   templateUrl: './user-form.component.html',
-  styleUrl: './user-form.component.scss'
+  styleUrl: './user-form.component.scss',
+  providers: [provideNativeDateAdapter()]
 })
 export class UserFormComponent implements OnInit, OnChanges {
 
@@ -17,9 +20,13 @@ export class UserFormComponent implements OnInit, OnChanges {
   @Input() statesList: StatesListResponse = [];
   @Input() userSelected: IUser = {} as IUser;
 
+  minDate: Date | null = null;
+  maxDate: Date | null = null;
+
   ngOnInit(): void {
     // somente quando o componente é carregado, caso as propriedades sejam populadas depois, o OnInit não captura as mudanças
     // caso precisasse de alguma lógica nas listas, no ngonInit não é ideial, porque as informações podem não estar populadas na hora de executar a lógica.
+    this.configureMinAndMaxDate();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -32,4 +39,9 @@ export class UserFormComponent implements OnInit, OnChanges {
   onPasswordChange(password: string) {
     this.passwordStrenthValue = getPasswordStrengthValue(password);
   }
+  private configureMinAndMaxDate() {
+    this.minDate = new Date(new Date().getFullYear() - 100, 0, 1);
+    this.maxDate = new Date();
+  }
 } 
+
