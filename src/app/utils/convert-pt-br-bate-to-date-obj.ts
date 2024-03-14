@@ -1,4 +1,5 @@
 export const convertPtBrDateToDateObj = (date: string): Date | null => {
+    if(!date) return null;
     const [day, month, year] = date.split('/').map(Number);
 
     if(isValidDate(day, month, year)){

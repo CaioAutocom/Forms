@@ -6,6 +6,7 @@ import { getPasswordStrengthValue } from '../../utils/get-passwords-strength-val
 import {provideNativeDateAdapter} from '@angular/material/core';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { convertPtBrDateToDateObj } from '../../utils/convert-pt-br-bate-to-date-obj';
+import { convertDateObjToPtBrDate } from '../../utils/convert-date-obj-to-pt-br-date';
 
 
 @Component({
@@ -50,7 +51,8 @@ export class UserFormComponent implements OnInit, OnChanges {
   }
 
   onDateChange(event: MatDatepickerInputEvent<any,any>) {
-    
+     if(!event.value) return;
+     this.userSelected.birthDate = convertDateObjToPtBrDate(event.value);
   }
   private configureMinAndMaxDate() {
     this.minDate = new Date(new Date().getFullYear() - 100, 0, 1);
