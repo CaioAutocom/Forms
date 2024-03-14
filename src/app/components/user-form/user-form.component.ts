@@ -4,6 +4,8 @@ import { StatesListResponse } from '../../types/states-list.response';
 import { IUser } from '../../interfaces/user/user.interface';
 import { getPasswordStrengthValue } from '../../utils/get-passwords-strength-value';
 import {provideNativeDateAdapter} from '@angular/material/core';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { convertPtBrDateToDateObj } from '../../utils/convert-pt-br-bate-to-date-obj';
 
 
 @Component({
@@ -13,7 +15,6 @@ import {provideNativeDateAdapter} from '@angular/material/core';
   providers: [provideNativeDateAdapter()]
 })
 export class UserFormComponent implements OnInit, OnChanges {
-
   passwordStrenthValue: number = 0;
 
   @Input() genresList: GenresListResponse = [];
@@ -22,6 +23,7 @@ export class UserFormComponent implements OnInit, OnChanges {
 
   minDate: Date | null = null;
   maxDate: Date | null = null;
+  dateValue: Date | null = null;
 
   ngOnInit(): void {
     // somente quando o componente é carregado, caso as propriedades sejam populadas depois, o OnInit não captura as mudanças
@@ -33,11 +35,22 @@ export class UserFormComponent implements OnInit, OnChanges {
     //executa cada vez que alguma propriedade da classe ser alterada
     const user_changed = changes['userSelected'];
 
-    if (user_changed) this.onPasswordChange(this.userSelected.password);
+    if (user_changed){
+      this.onPasswordChange(this.userSelected.password);
+      this.setBirthDateToDatepickerOnUserChange(this.userSelected.birthDate);
+    } 
+  }
+
+  setBirthDateToDatepickerOnUserChange(birthDate: string) {
+    this.dateValue = convertPtBrDateToDateObj(birthDate);
   }
 
   onPasswordChange(password: string) {
     this.passwordStrenthValue = getPasswordStrengthValue(password);
+  }
+
+  onDateChange(event: MatDatepickerInputEvent<any,any>) {
+    
   }
   private configureMinAndMaxDate() {
     this.minDate = new Date(new Date().getFullYear() - 100, 0, 1);
